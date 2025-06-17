@@ -1,0 +1,47 @@
+server:
+  port: 10001
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    enabled: true
+    check-template-location: true
+    cache: false
+
+  datasource:
+    url: jdbc:h2:mem:testdb 			#메모리 DB 사용
+    driver-class-name: org.h2.Driver	#driver
+    username: sa						#default username
+    password: sa
+  jpa:
+    defer-datasource-initialization: true    #hibernate 초기화 지연
+    hibernate:
+      ddl-auto: none                        #ddl 옵션: 아무것도 안함
+    show-sql: true
+  h2:
+    console: #h2-console
+      enabled: true
+      path: /h2-console                        #h2-console url 설정
+  sql:
+    init: # application 실행시 sql 실행
+      username: sa
+      password: sa
+      schema-locations: classpath*:db/schema.sql
+      data-locations: classpath*:db/data.sql
+
+springdoc:
+  version: '@project.version@'
+  api-docs:
+    path: /api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+    doc-expansion: none
+  paths-to-match:
+    - /api/**
