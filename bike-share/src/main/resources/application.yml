@@ -2,6 +2,8 @@ server:
   port: 10001
 
 spring:
+  config:
+    import: optional:file:.env[.properties]
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -10,10 +12,10 @@ spring:
     cache: false
 
   datasource:
-    url: jdbc:h2:mem:testdb 			#메모리 DB 사용
-    driver-class-name: org.h2.Driver	#driver
-    username: sa						#default username
-    password: sa
+    url: jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres #supabase postgresql
+    driver-class-name: org.postgresql.Driver	#driver
+    username: ${DB_USERNAME}					#.env username
+    password: ${DB_PASSWORD}                    #.env password
   jpa:
     defer-datasource-initialization: true    #hibernate 초기화 지연
     hibernate:
